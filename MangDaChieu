@@ -1,24 +1,43 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Globalization;
+using System;                     // Các lớp cơ bản của .NET
+using System.Collections.Generic;  // Dành cho các collections như List, Dictionary
+using System.Linq;                 // Dành cho các phương thức LINQ
+using System.Text;                 // Dành cho xử lý chuỗi văn bản
+using System.Threading.Tasks;     // Dành cho async/await và tác vụ bất đồng bộ
+using System.IO;                   // Dành cho thao tác với các tệp tin và thư mục
+using System.Globalization;         // Dành cho các lớp xử lý văn hóa (ví dụ: định dạng ngày, số)
+using System.Net.NetworkInformation; // Dành cho các lớp liên quan đến mạng, kiểm tra trạng thái kết nối mạng
 
 namespace QuanLySinhVienUEH
 {
+    
     internal class Class6
     {
+
+
+
         static string[,] sinhViens = new string[1000, 8]; // Mảng lưu danh sách sinh viên (tối đa 100 sinh viên)
         static int sinhVienCount = 0; // Số lượng sinh viên hiện tại
         static string fileName = "SinhVien.txt"; // Đường dẫn đến file
         static void Main(string[] args)
         {
+
+
+
+            // Hiển thị giao diện đăng nhập
+            if (!DangNhap())
+            {
+                Console.WriteLine("\nĐăng nhập thất bại quá 3 lần. Chương trình sẽ thoát.");
+                return;
+            }
+
+            // Tiếp tục hiển thị menu nếu đăng nhập thành công
             while (true)
             {
                 ShowMenu();
+                Console.OutputEncoding = System.Text.Encoding.UTF8;
+
                 Console.Write("\nChọn một tùy chọn (1-7): ");
+
                 string choice = Console.ReadLine();
 
                 switch (choice)
@@ -26,31 +45,24 @@ namespace QuanLySinhVienUEH
                     case "1":
                         ThemSinhVien();
                         break;
-
                     case "2":
                         TimTTSinhVien();
                         break;
-
                     case "3":
                         SuaSinhVien();
                         break;
-
                     case "4":
                         XoaSinhVien();
                         break;
-
                     case "5":
                         XuatDanhSachHocBong();
                         break;
-
                     case "6":
                         XetLoaiTotNghiep();
                         break;
-
                     case "7":
                         Console.WriteLine("Thoát chương trình.");
                         return;
-
                     default:
                         Console.WriteLine("Lựa chọn không hợp lệ. Vui lòng thử lại!");
                         break;
@@ -59,6 +71,76 @@ namespace QuanLySinhVienUEH
                 Console.WriteLine("\nNhấn phím bất kỳ để quay lại menu...");
                 Console.ReadKey();
             }
+        }
+
+        // Hàm đăng nhập
+        static bool DangNhap()
+        {
+            const string taiKhoanDung = "uehquanlysinhvien";
+const string matKhauDung = "sinhvienueh10";
+            int soLanThu = 0;
+            const int maxThu = 3;
+
+            while (soLanThu < maxThu)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string title = @"  
+   
+ _       __     __                             __           __  __________  __   _____ __            __           __ 
+| |     / /__  / /________  ____ ___  ___     / /_____     / / / / ____/ / / /  / ___// /___  ______/ /__  ____  / /_
+| | /| / / _ \/ / ___/ __ \/ __ `__ \/ _ \   / __/ __ \   / / / / __/ / /_/ /   \__ \/ __/ / / / __  / _ \/ __ \/ __/
+| |/ |/ /  __/ / /__/ /_/ / / / / / /  __/  / /_/ /_/ /  / /_/ / /___/ __  /   ___/ / /_/ /_/ / /_/ /  __/ / / / /_  
+|__/|__/\___/_/\___/\____/_/ /_/ /_/\___/   \__/\____/   \____/_____/_/ /_/   /____/\__/\__,_/\__,_/\___/_/ /_/\__/  
+                                                                                                                     
+  
+";
+                int windowWidth = Console.WindowWidth;
+
+                foreach (var line in title.Split('\n'))
+                {
+                    int spacesToAdd = (windowWidth - line.Length) / 2;
+                    Console.WriteLine(new string(' ', spacesToAdd) + line);
+                }
+
+                Console.ResetColor();
+
+                Console.WriteLine("\n");
+
+                // Hiển thị "Tài khoản" căn giữa
+                string taiKhoanText = "Tài khoản: ";
+                int taiKhoanSpaces = (windowWidth - taiKhoanText.Length) / 2;
+                Console.Write(new string(' ', taiKhoanSpaces));
+                Console.Write(taiKhoanText);
+                string taiKhoan = Console.ReadLine();
+
+                // Hiển thị "Mật khẩu" căn giữa
+                string matKhauText = "Mật khẩu: ";
+                int matKhauSpaces = (windowWidth - matKhauText.Length) / 2;
+                Console.Write(new string(' ', matKhauSpaces));
+                Console.Write(matKhauText);
+                string matKhau = Console.ReadLine();
+
+                if (taiKhoan == taiKhoanDung && matKhau == matKhauDung)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\nĐăng nhập thành công!");
+                    Console.ResetColor();
+                    return true;
+                }
+                else
+                {
+                    soLanThu++;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"\nSai tài khoản hoặc mật khẩu. Bạn còn {maxThu - soLanThu} lần thử.");
+                    Console.ResetColor();
+
+                    // Hiển thị thông báo ngay lập tức và chờ người dùng nhấn phím
+                    Console.WriteLine("\nNhấn phím bất kỳ để thử lại...");
+                    Console.ReadKey();
+                }
+            }
+return false;
         }
 
         static void ShowMenu()
