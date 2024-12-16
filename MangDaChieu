@@ -571,7 +571,7 @@ namespace QuanLySinhVienUEH
                         // Kiểm tra định dạng bằng Regular Expression
                         if (!System.Text.RegularExpressions.Regex.IsMatch(lop, @"^[a-zA-Z]{3}\d{3}$"))
                         {
-                            throw new ArgumentException("Mã lớp không đúng định dạng. Vui lòng nhập lại.");
+                            Console.WriteLine("Mã lớp không đúng định dạng. Vui lòng nhập lại.");
                         }
                         else
                         {
