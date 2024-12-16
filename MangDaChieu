@@ -9,7 +9,7 @@ using System.Net.NetworkInformation; // Dành cho các lớp liên quan đến m
 
 namespace QuanLySinhVienUEH
 {
-    
+
     internal class Class6
     {
 
@@ -74,7 +74,7 @@ namespace QuanLySinhVienUEH
         static bool DangNhap()
         {
             const string taiKhoanDung = "uehquanlysinhvien";
-const string matKhauDung = "sinhvienueh10";
+            const string matKhauDung = "sinhvienueh10";
             int soLanThu = 0;
             const int maxThu = 3;
 
@@ -137,7 +137,7 @@ const string matKhauDung = "sinhvienueh10";
                     Console.ReadKey();
                 }
             }
-return false;
+            return false;
         }
 
         static void ShowMenu()
@@ -146,11 +146,11 @@ return false;
             Console.ForegroundColor = ConsoleColor.DarkCyan;
 
             string title = @"
-   ___                      _            ____  _       _      __     ___              _   _ _____ _   _ 
-  / _ \ _   _  __ _ _ __   | |   _   _  / ___|(_)_ __ | |__   \ \   / (_) ___ _ __   | | | | ____| | | |
- | | | | | | |/ _` | '_ \  | |  | | | | \___ \| | '_ \| '_ \   \ \ / /| |/ _ \ '_ \  | | | |  _| | |_| |
- | |_| | |_| | (_| | | | | | |__| |_| |  ___) | | | | | | | |   \ V / | |  __/ | | | | |_| | |___|  _  |
-      \__\_\\__,_|\__,_|_| |_| |_____\__, | |____/|_|_| |_|_| |_|    \_/  |_|\___|_| |_|  \___/|_____|_| |_|   
+    ___                      _            ____  _       _      __     ___              _   _ _____ _   _ 
+   / _ \ _   _  __ _ _ __   | |   _   _  / ___|(_)_ __ | |__   \ \   / (_) ___ _ __   | | | | ____| | | |
+  | | | | | | |/ _` | '_ \  | |  | | | | \___ \| | '_ \| '_ \   \ \ / /| |/ _ \ '_ \  | | | |  _| | |_| |
+  | |_| | |_| | (_| | | | | | |__| |_| |  ___) | | | | | | | |   \ V / | |  __/ | | | | |_| | |___|  _  |
+     \__\_\\__,_|\__,_|_| |_| |_____\__, | |____/|_|_| |_|_| |_|    \_/  |_|\___|_| |_|  \___/|_____|_| |_|   
                                  |___/                                                                  
 ";
             int windowWidth = Console.WindowWidth;
@@ -536,7 +536,7 @@ return false;
                     long StudentID = long.Parse(mssv);
                     if (mssv.Length != 8)
                     {
-                        throw new ArgumentException("Mã số sinh viên phải bao gồm đúng 8 chữ số.");
+                        Console.WriteLine("Mã số sinh viên phải bao gồm đúng 8 chữ số.");
                     }
                     else
                     {
@@ -1084,6 +1084,11 @@ return false;
                     // Tìm sinh viên có MSSV trùng khớp
                     if (fields[0].Trim() == mssv)
                     {
+                        found = true;  // Sinh viên được tìm thấy
+                        Console.WriteLine("Thông tin sinh viên:");
+                        Console.WriteLine($"MSSV: {fields[0]}");
+                        Console.WriteLine($"Họ tên: {fields[1]}");
+                        Console.WriteLine($"Lớp: {fields[2]}");
                         // Lấy điểm trung bình từ file
                         double diemTB = double.Parse(fields[6]);
 
@@ -1101,7 +1106,7 @@ return false;
                             LoaiTotNghiep = "Giỏi";
                             Console.WriteLine($"Với điểm trung bình hiện tại, loại tốt nghiệp tạm thời của bạn là {LoaiTotNghiep}! Hãy cố gắng học tập nhé!");
                         }
-                        else if (Diem == 3 | Diem == 2.5)
+                        else if (Diem == 3 || Diem == 2.5)
                         {
                             LoaiTotNghiep = "Khá";
                             Console.WriteLine($"Với điểm trung bình hiện tại, loại tốt nghiệp tạm thời của bạn là {LoaiTotNghiep}! Hãy cố gắng học tập nhé!");
@@ -1116,13 +1121,16 @@ return false;
                             //Nếu sinh viên chưa đủ điều kiện thì báo
                             Console.WriteLine("Bạn chưa đủ điều kiện tốt nghiệp.");
                         }
-                        // Nếu không tìm thấy MSSV trong file
                         if (!found)
                         {
                             Console.WriteLine("Không tìm thấy sinh viên với MSSV này trong file.");
+                            // Nếu không tìm thấy MSSV trong file
+
                         }
                     }
                 }
+
+
             }
             catch (Exception ex)
             {
