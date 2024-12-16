@@ -1099,21 +1099,25 @@ namespace QuanLySinhVienUEH
                         if (Diem == 4)
                         {
                             LoaiTotNghiep = "Xuất sắc";
+                            Console.WriteLine($"Điểm trung bình: {Diem}");
                             Console.WriteLine($"Với điểm trung bình hiện tại, loại tốt nghiệp tạm thời của bạn là {LoaiTotNghiep}! Hãy cố gắng học tập nhé!");
                         }
                         else if (Diem == 3.5)
                         {
                             LoaiTotNghiep = "Giỏi";
+                            Console.WriteLine($"Điểm trung bình: {Diem}");
                             Console.WriteLine($"Với điểm trung bình hiện tại, loại tốt nghiệp tạm thời của bạn là {LoaiTotNghiep}! Hãy cố gắng học tập nhé!");
                         }
                         else if (Diem == 3 || Diem == 2.5)
                         {
                             LoaiTotNghiep = "Khá";
+                            Console.WriteLine($"Điểm trung bình: {Diem}");
                             Console.WriteLine($"Với điểm trung bình hiện tại, loại tốt nghiệp tạm thời của bạn là {LoaiTotNghiep}! Hãy cố gắng học tập nhé!");
                         }
                         else if (Diem == 2)
                         {
                             LoaiTotNghiep = "Trung bình";
+                            Console.WriteLine($"Điểm trung bình: {Diem}");
                             Console.WriteLine($"Với điểm trung bình hiện tại, loại tốt nghiệp tạm thời của bạn là {LoaiTotNghiep}! Hãy cố gắng học tập nhé!");
                         }
                         else
